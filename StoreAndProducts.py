@@ -15,10 +15,19 @@ class Store:
         self.listOfProducts.pop(id) 
 
     def inflation(self, percent_increase):
-        pass
+        for product in self.listOfProducts:
+            product.price = product.price + (product.price * percent_increase) 
 
     def set_clearance(self, category, percent_discount):
-        pass
+        for product in self.listOfProducts:
+            if(category == product.category):
+                product.price = product.price - (product.price * percent_discount) 
+            else: 
+                pass 
+    
+    def print_all_items(self):
+        for product in self.listOfProducts:
+            print("\nProduct Name: ", product.name, "\nProduct Price: $", product.price, "\nProduct Category: ", product.category)
 
 class Product:
     def __init__(self, name, price, category):
@@ -32,28 +41,35 @@ class Product:
     def print_info(self):
         print("\nProduct Name: ", self.name, "\nProduct Price: $", self.price, "\nProduct Category: ", self.category)
 
-# Store
-# add product
-# sell product
+    def getName(self):
+        return self.name
 
-# Product
-# update price
-# print info
+    def getPrice(self): 
+        return self.price 
+
+    def getCategory(self):
+        return self.category 
+
 
 #creating a store
 store1 = Store("Target")
-# creating 4 products
-product1 = Product("Toothpaste", 1.5, "bathroom")
+
+# creating products
+product1 = Product("Toothpaste", 2, "bathroom")
 product2 = Product("Toothbrush", 1, "bathroom")
-product3 = Product("Soap", .5, "bathroom")
-product4 = Product("Shampoo", 2, "bathroom")
 
 # adding products to the store
 store1.add_product(product1) 
 store1.add_product(product2)
-store1.add_product(product3)
-store1.add_product(product4)
+
+# inflation increase
+store1.inflation(.5) 
+
+# setting clearance
+store1.set_clearance("bathroom", .5) 
+
 # printing list of products
+store1.print_all_items()
 
 
 
